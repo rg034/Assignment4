@@ -26,18 +26,19 @@ Oct  10, 2017 - Changed printableString() to use super
  */
 public class Painting extends StoreItem{
     static int paintCount;
-    String title;
+   // String title;
     int height;
     int width;
     String media;
     
     public Painting(String title, String author, 
-        int purchasePrice, int askingPrice, int height, int width, String media)
+        int purchasePrice, int askingPrice, String media, int height, int width)
     {
         super(title, author, purchasePrice, askingPrice);
+        this.media = media;
         this.height = height;
         this.width = width;
-        this.media = media;
+
         paintCount++;
     }
     

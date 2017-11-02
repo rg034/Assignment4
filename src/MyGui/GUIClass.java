@@ -45,6 +45,8 @@ public class GUIClass extends JFrame
     String director = "";
     String genre = "";
     int count = 0;
+    int pointer = 0;
+    
     StoreItem[] numStoreItems = new StoreItem[20];
        
     Book book = new Book(title, author,
@@ -53,7 +55,7 @@ public class GUIClass extends JFrame
             purchasePrice, askingPrice, director, 
             actor, actress);
     Painting painting = new Painting(title, author,
-            purchasePrice, askingPrice,height, width, media);
+            purchasePrice, askingPrice, media, height, width);
     
     private final JLabel jLabel1;    
     private final JLabel jLabel2;    
@@ -117,7 +119,7 @@ public class GUIClass extends JFrame
         
         
         //large space so that title falls where it needs to 
-        jLabel1 = new JLabel("                          Title");
+        jLabel1 = new JLabel("                  Title");
         add(jLabel1);
         
         JTextField1 = new JTextField(10);
@@ -141,37 +143,37 @@ public class GUIClass extends JFrame
         JTextField4 = new JTextField(10);
         add(JTextField4);
         
-        jLabel5 = new JLabel("Purchase Price");
+        jLabel5 = new JLabel("Genre");
         add(jLabel5);
         
         JTextField5 = new JTextField(10);
         add(JTextField5);
         
-        jLabel6 = new JLabel("Genre");
+        jLabel6 = new JLabel("Director");
         add(jLabel6);
         
         JTextField6 = new JTextField(10);
         add(JTextField6);
         
-        jLabel7 = new JLabel("Director");
+        jLabel7 = new JLabel("                    Actor");
         add(jLabel7);
         
         JTextField7 = new JTextField(10);
         add(JTextField7);
         
-        jLabel8 = new JLabel("Media");
+        jLabel8 = new JLabel("Actress");
         add(jLabel8);
         
         JTextField8 = new JTextField(10);
         add(JTextField8);
         
-        jLabel9 = new JLabel("Actress");
+        jLabel9 = new JLabel("Media");
         add(jLabel9);
         
         JTextField9 = new JTextField(10);
         add(JTextField9);
         
-        jLabel10 = new JLabel("\n                                       Width");
+        jLabel10 = new JLabel("\n                     Width");
         add(jLabel10);
         
         JTextField10 = new JTextField(10);
@@ -200,9 +202,8 @@ public class GUIClass extends JFrame
     }
     
     /*
-    This is where all of the work of the button is done. User input is sent to 
-    the various classes to make the program work.
-    
+    This is where all of the work of the ENTER button is done. User input is 
+    sent to the various classes to make the program work. 
     */
      private class ButtonHandler implements ActionListener
     {
@@ -214,25 +215,25 @@ public class GUIClass extends JFrame
         try
         {
             int index = jComboBox1.getSelectedIndex();
-            title = JTextField2.getText();
-            author = JTextField1.getText();
+            title = JTextField1.getText();
+            author = JTextField2.getText();
 
-            purchasePrice = Integer.parseInt(JTextField5.getText());
+            purchasePrice = Integer.parseInt(JTextField3.getText());
             askingPrice = Integer.parseInt(JTextField4.getText());
 
         //book
         if(index == 0)
         {
-            genre = JTextField6.getText(); 
+            genre = JTextField5.getText(); 
             book = new Book(title, author, purchasePrice, askingPrice, genre);
             JTextArea1.setText(book.printableString());
         }
         //movie
         else if(index == 1)
         {
-            director = JTextField7.getText();
-            actor = JTextField9.getText();
-            actress = JTextField10.getText();
+            director = JTextField6.getText();
+            actor = JTextField7.getText();
+            actress = JTextField8.getText();
 
             movie = new Movie(title, author,
                 purchasePrice, askingPrice, director, actor, actress);
@@ -242,11 +243,11 @@ public class GUIClass extends JFrame
         //painting
         else
         {
-            media = JTextField8.getText();
-            width = Integer.parseInt(JTextField3.getText());
+            media = JTextField9.getText();
+            width = Integer.parseInt(JTextField10.getText());
             height = Integer.parseInt(JTextField11.getText());
             painting = new Painting(title, author,
-            purchasePrice, askingPrice,height, width, media);
+            purchasePrice, askingPrice,media, height, width);
             JTextArea1.setText(painting.printableString());
 
         }
@@ -273,7 +274,7 @@ public class GUIClass extends JFrame
         }
     }
      
-      /*
+/*
 ‘******************************************************
 ‘***  jComboBox1ActionPerformed
 ‘***  Raelene Gomes
@@ -289,43 +290,62 @@ public class GUIClass extends JFrame
  */
       private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         //change input accessibility based on selection
-        int index = jComboBox1.getSelectedIndex();
+        int index = 1; //set as book for default
+        index = jComboBox1.getSelectedIndex();
         //book
         if(index == 0)
         {
-            JTextField6.enable(true);
+            JTextField5.enable(true);
+            JTextField6.enable(false);
             JTextField7.enable(false);
             JTextField8.enable(false);
-            JTextField9.enable(true);
+            JTextField9.enable(false);
             JTextField10.enable(false);
-            JTextField3.enable(false);
+            //JTextField3.enable(false);
             JTextField11.enable(false);
         }
         //movie
         else if(index == 1)
         {
-            JTextField6.enable(false);
+            JTextField5.enable(false);
+            JTextField6.enable(true);
             JTextField7.enable(true);
-            JTextField8.enable(false);
-            JTextField9.enable(true);
-            JTextField10.enable(true);
-            JTextField3.enable(false);
+            JTextField8.enable(true);
+            JTextField9.enable(false);
+            JTextField10.enable(false);
+            //JTextField3.enable(false);
             JTextField11.enable(false);
             
         }
         //painting
         else
         {
+            JTextField5.enable(false);
             JTextField6.enable(false);
             JTextField7.enable(false);
-            JTextField8.enable(true);
-            JTextField9.enable(false);
+            JTextField8.enable(false);
+            JTextField9.enable(true);
             JTextField10.enable(true);
-            JTextField3.enable(true);
+           // JTextField3.enable(true);
             JTextField11.enable(true);
         }
             
     }
+    
+/*
+‘******************************************************
+‘***  JButton2
+‘***  Raelene Gomes
+‘******************************************************
+‘*** This method is the action event that is called when the user clicks the 
+     left arrow. It parses through the numStoreItems array
+‘*** Method Inputs: action event
+‘*** Return value: void
+‘******************************************************
+‘*** Oct 28, 2017
+     Oct 01, 2017 - attempt to fix output using technique Dr Woodcock showed me
+‘******************************************************
+ */
       
     private void JButton2(java.awt.event.ActionEvent evt) 
     {   
@@ -333,27 +353,43 @@ public class GUIClass extends JFrame
         JTextArea1.setText("");
         
         //left arrow
-        count--;
-        if(count < 0)
+        pointer--;
+        if(pointer < 0)
         {
-            count = numStoreItems.length - 1;   
+            pointer = numStoreItems.length - 1;   
         }
-        JTextArea1.setText(numStoreItems[count].printableString());
+        JTextArea1.setText(numStoreItems[pointer].printableString());
+        System.out.println(numStoreItems[pointer].printableString());
         
     }
     
+/*
+‘******************************************************
+‘***  JButton3
+‘***  Raelene Gomes
+‘******************************************************
+‘*** This method is the action event that is called when the user clicks the 
+     right arrow. It parses through the numStoreItems array
+‘*** Method Inputs: action event
+‘*** Return value: void
+‘******************************************************
+‘*** Oct 28, 2017
+     Oct 01, 2017 - attempt to fix output using technique Dr Woodcock showed me
+‘******************************************************
+ */
     private void JButton3(java.awt.event.ActionEvent evt)
     {
         //clear text area
         JTextArea1.setText("");
 
         // right arrow
-        count++;
-        if(count >= numStoreItems.length)
+        pointer++;
+        if(pointer >= numStoreItems.length)
         {
-            count=0;
+            pointer=0;
         }    
-        JTextArea1.setText(numStoreItems[count].printableString());
+        JTextArea1.setText(numStoreItems[pointer].printableString());
+        System.out.println(numStoreItems[pointer].printableString());
     }
    
     
