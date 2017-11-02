@@ -10,6 +10,7 @@ Oct 17, 2017
 Oct 24, 2017  - fix combo box
               - add action listeners
               - debug issues with layout
+******************************************************
  */
 package MyGui;
 import javax.swing.JFrame;
@@ -43,6 +44,7 @@ public class GUIClass extends JFrame
     String actress = "";
     String director = "";
     String genre = "";
+    int count = 0;
     StoreItem[] numStoreItems = new StoreItem[20];
        
     Book book = new Book(title, author,
@@ -80,6 +82,8 @@ public class GUIClass extends JFrame
     private final JTextField JTextField11;
         
     private final JButton JButton1;
+    private final JButton JButton2;
+    private final JButton JButton3;
     
     private final JTextArea JTextArea1;
     
@@ -186,10 +190,13 @@ public class GUIClass extends JFrame
         //create new ButtonHandler for button event handling
         ButtonHandler handler = new ButtonHandler();
         JButton1.addActionListener(handler);
+        
+        JButton2 = new JButton("<");
+        add(JButton2);
+        
+        JButton3 = new JButton(">");
+        add(JButton3);
 
-        
-        
-   
     }
     
     /*
@@ -243,6 +250,19 @@ public class GUIClass extends JFrame
             JTextArea1.setText(painting.printableString());
 
         }
+        
+        //clear text fields after entering data
+        JTextField1.setText("");
+        JTextField2.setText("");
+        JTextField3.setText("");
+        JTextField4.setText("");
+        JTextField5.setText("");
+        JTextField6.setText("");
+        JTextField7.setText("");
+        JTextField8.setText("");
+        JTextField9.setText("");
+        JTextField10.setText("");
+        JTextField11.setText("");      
 
     }
     catch(NumberFormatException e)
@@ -305,6 +325,35 @@ public class GUIClass extends JFrame
             JTextField11.enable(true);
         }
             
+    }
+      
+    private void JButton2(java.awt.event.ActionEvent evt) 
+    {   
+        //clear text area
+        JTextArea1.setText("");
+        
+        //left arrow
+        count--;
+        if(count < 0)
+        {
+            count = numStoreItems.length - 1;   
+        }
+        JTextArea1.setText(numStoreItems[count].printableString());
+        
+    }
+    
+    private void JButton3(java.awt.event.ActionEvent evt)
+    {
+        //clear text area
+        JTextArea1.setText("");
+
+        // right arrow
+        count++;
+        if(count >= numStoreItems.length)
+        {
+            count=0;
+        }    
+        JTextArea1.setText(numStoreItems[count].printableString());
     }
    
     
