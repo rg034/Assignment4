@@ -281,6 +281,7 @@ public class GUIClass extends JFrame
         JTextField11.setText("");    
         
         count++;
+        
 
     }
     catch(NumberFormatException e)
@@ -368,25 +369,25 @@ public class GUIClass extends JFrame
     {   
         try
         {    
-        
-            //clear text area
-            
-            JTextArea1.setText("");
             //left arrow
-            pointer--;
             
-            //go through array while null
-            while(numStoreItems[pointer]== null){pointer--;}
+            //clear text area           
+            JTextArea1.setText("");
             
             //only print if not null
             if(numStoreItems[pointer]!= null)
             {    
-                if(pointer < 0)
+                if(pointer < count)
                 {
                     pointer = count - 1;   
                 }
                 JTextArea1.setText(numStoreItems[pointer].printableString());
-                System.out.println(numStoreItems[pointer].printableString());
+                //System.out.println(numStoreItems[pointer].printableString());
+                pointer--;
+            }
+            else
+            {
+                pointer = count - 1;
             }
             
         }
@@ -415,24 +416,27 @@ public class GUIClass extends JFrame
     {
         try
         {
+            // right arrow  
+            
             //clear text area
             JTextArea1.setText("");
-
-            // right arrow
-            pointer++;
             
-            
-            while(numStoreItems[pointer]== null){pointer++;}
-            
+            //only print if not null
             if(numStoreItems[pointer]!= null)
             {    
                 if(pointer >= count)
                 {
-                    pointer=0;
+                    pointer = 0;
                 }    
                 JTextArea1.setText(numStoreItems[pointer].printableString());
-                System.out.println(numStoreItems[pointer].printableString());
-            }    
+                //System.out.println(numStoreItems[pointer].printableString());
+                pointer++;
+            }
+            else
+            {
+                pointer = 0;
+            }
+            
         }
         catch(Exception e)
         {
