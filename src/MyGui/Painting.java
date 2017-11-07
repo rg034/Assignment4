@@ -1,11 +1,4 @@
 package MyGui;
-
-
-import java.util.Date;
-
-
-
-
 /*
 Class Name: Painting
 Class Author: Raelene Gomes

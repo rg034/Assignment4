@@ -10,6 +10,8 @@ Oct 17, 2017
 Oct 24, 2017  - fix combo box
               - add action listeners
               - debug issues with layout
+Nov 01, 2017  - attempt to fix output of StoreItem array
+Nov 07, 2017  - fixed output of StoreItem array!!
 ******************************************************
  */
 package MyGui;
@@ -280,6 +282,7 @@ public class GUIClass extends JFrame
         JTextField10.setText("");
         JTextField11.setText("");    
         
+        //don't forget to increment count
         count++;
         
 
@@ -361,7 +364,8 @@ public class GUIClass extends JFrame
 ‘*** Return value: void
 ‘******************************************************
 ‘*** Oct 28, 2017
-     Oct 01, 2017 - attempt to fix output using technique Dr Woodcock showed me
+     Nov 01, 2017 - attempt to fix output using technique Dr Woodcock showed me
+     Nov 07, 2017 - finally got output to work!
 ‘******************************************************
  */
       
@@ -408,7 +412,8 @@ public class GUIClass extends JFrame
 ‘*** Return value: void
 ‘******************************************************
 ‘*** Oct 28, 2017
-     Oct 01, 2017 - attempt to fix output using technique Dr Woodcock showed me
+     Nov 01, 2017 - attempt to fix output using technique Dr Woodcock showed me
+     Nov 07, 2017 - finally got output to work!
 ‘******************************************************
  */
 

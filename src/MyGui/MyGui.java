@@ -1,8 +1,14 @@
+
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Class name: MyGUI
+Author: Raelene Gomes
+***************************************************
+This class contains main. It creates a new instance of GUIClass 
+****************************************************
+Oct 17, 2017
+******************************************************
  */
+ 
 package MyGui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;

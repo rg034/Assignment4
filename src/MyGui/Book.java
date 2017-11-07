@@ -1,10 +1,5 @@
 package MyGui;
 
-
-import java.util.Date;
-
-
-
 /*
 Class Name: Book
 Class Author: Raelene Gomes
