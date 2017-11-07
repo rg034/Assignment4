@@ -47,7 +47,7 @@ public class GUIClass extends JFrame
     int count = 0;
     int pointer = 0;
     
-    StoreItem[] numStoreItems = new StoreItem[20];
+    StoreItem[] numStoreItems = new StoreItem[5];
        
     Book book = new Book(title, author,
             purchasePrice, askingPrice, genre);
@@ -195,9 +195,21 @@ public class GUIClass extends JFrame
         
         JButton2 = new JButton("<");
         add(JButton2);
+        //create new ButtonHandler
+        JButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButton2ActionPerformed(evt);
+            }
+        });
         
         JButton3 = new JButton(">");
         add(JButton3);
+        //create new ButtonHandler
+        JButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButton3ActionPerformed(evt);
+            }
+        });
 
     }
     
@@ -227,6 +239,7 @@ public class GUIClass extends JFrame
             genre = JTextField5.getText(); 
             book = new Book(title, author, purchasePrice, askingPrice, genre);
             JTextArea1.setText(book.printableString());
+            numStoreItems[count]= book;
         }
         //movie
         else if(index == 1)
@@ -237,7 +250,8 @@ public class GUIClass extends JFrame
 
             movie = new Movie(title, author,
                 purchasePrice, askingPrice, director, actor, actress);
-            JTextArea1.setText(movie.printableString());           
+            JTextArea1.setText(movie.printableString());
+            numStoreItems[count]= movie;
             
         }
         //painting
@@ -249,6 +263,7 @@ public class GUIClass extends JFrame
             painting = new Painting(title, author,
             purchasePrice, askingPrice,media, height, width);
             JTextArea1.setText(painting.printableString());
+            numStoreItems[count]= painting;
 
         }
         
@@ -263,7 +278,9 @@ public class GUIClass extends JFrame
         JTextField8.setText("");
         JTextField9.setText("");
         JTextField10.setText("");
-        JTextField11.setText("");      
+        JTextField11.setText("");    
+        
+        count++;
 
     }
     catch(NumberFormatException e)
@@ -290,7 +307,7 @@ public class GUIClass extends JFrame
  */
       private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         //change input accessibility based on selection
-        int index = 1; //set as book for default
+        int index = 0; //set as book for default
         index = jComboBox1.getSelectedIndex();
         //book
         if(index == 0)
@@ -334,7 +351,7 @@ public class GUIClass extends JFrame
     
 /*
 ‘******************************************************
-‘***  JButton2
+‘***  JButton2ActionPerformed
 ‘***  Raelene Gomes
 ‘******************************************************
 ‘*** This method is the action event that is called when the user clicks the 
@@ -347,25 +364,41 @@ public class GUIClass extends JFrame
 ‘******************************************************
  */
       
-    private void JButton2(java.awt.event.ActionEvent evt) 
+    private void JButton2ActionPerformed(java.awt.event.ActionEvent evt) 
     {   
-        //clear text area
-        JTextArea1.setText("");
+        try
+        {    
         
-        //left arrow
-        pointer--;
-        if(pointer < 0)
-        {
-            pointer = numStoreItems.length - 1;   
+            //clear text area
+            
+            JTextArea1.setText("");
+            //left arrow
+            pointer--;
+            
+            //go through array while null
+            while(numStoreItems[pointer]== null){pointer--;}
+            
+            //only print if not null
+            if(numStoreItems[pointer]!= null)
+            {    
+                if(pointer < 0)
+                {
+                    pointer = count - 1;   
+                }
+                JTextArea1.setText(numStoreItems[pointer].printableString());
+                System.out.println(numStoreItems[pointer].printableString());
+            }
+            
         }
-        JTextArea1.setText(numStoreItems[pointer].printableString());
-        System.out.println(numStoreItems[pointer].printableString());
-        
+        catch(Exception e)
+        {
+            JTextArea1.setText("Error. Nothing in this spot in array. ");
+        }
     }
     
 /*
 ‘******************************************************
-‘***  JButton3
+‘***  JButton3ActionPerformed
 ‘***  Raelene Gomes
 ‘******************************************************
 ‘*** This method is the action event that is called when the user clicks the 
@@ -377,19 +410,35 @@ public class GUIClass extends JFrame
      Oct 01, 2017 - attempt to fix output using technique Dr Woodcock showed me
 ‘******************************************************
  */
-    private void JButton3(java.awt.event.ActionEvent evt)
-    {
-        //clear text area
-        JTextArea1.setText("");
 
-        // right arrow
-        pointer++;
-        if(pointer >= numStoreItems.length)
+    private void JButton3ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        try
         {
-            pointer=0;
-        }    
-        JTextArea1.setText(numStoreItems[pointer].printableString());
-        System.out.println(numStoreItems[pointer].printableString());
+            //clear text area
+            JTextArea1.setText("");
+
+            // right arrow
+            pointer++;
+            
+            
+            while(numStoreItems[pointer]== null){pointer++;}
+            
+            if(numStoreItems[pointer]!= null)
+            {    
+                if(pointer >= count)
+                {
+                    pointer=0;
+                }    
+                JTextArea1.setText(numStoreItems[pointer].printableString());
+                System.out.println(numStoreItems[pointer].printableString());
+            }    
+        }
+        catch(Exception e)
+        {
+            JTextArea1.setText("Error. Nothing in this spot in array. ");
+      
+        }
     }
    
     
