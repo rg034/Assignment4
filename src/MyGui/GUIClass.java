@@ -48,6 +48,7 @@ public class GUIClass extends JFrame
     String genre = "";
     int count = 0;
     int pointer = 0;
+    int index = 0; //set as book for default
     
     StoreItem[] numStoreItems = new StoreItem[5];
        
@@ -228,10 +229,9 @@ public class GUIClass extends JFrame
             // get inputs from GUI
         try
         {
-            int index = jComboBox1.getSelectedIndex();
+            index = jComboBox1.getSelectedIndex();
             title = JTextField1.getText();
             author = JTextField2.getText();
-
             purchasePrice = Integer.parseInt(JTextField3.getText());
             askingPrice = Integer.parseInt(JTextField4.getText());
 
@@ -241,6 +241,8 @@ public class GUIClass extends JFrame
             genre = JTextField5.getText(); 
             book = new Book(title, author, purchasePrice, askingPrice, genre);
             JTextArea1.setText(book.printableString());
+            
+            //This is polymorphism!! You can add a book to the StoreItem array
             numStoreItems[count]= book;
         }
         //movie
@@ -253,6 +255,8 @@ public class GUIClass extends JFrame
             movie = new Movie(title, author,
                 purchasePrice, askingPrice, director, actor, actress);
             JTextArea1.setText(movie.printableString());
+            
+            //This is polymorphism!! You can add a movie to the StoreItem array
             numStoreItems[count]= movie;
             
         }
@@ -265,6 +269,8 @@ public class GUIClass extends JFrame
             painting = new Painting(title, author,
             purchasePrice, askingPrice,media, height, width);
             JTextArea1.setText(painting.printableString());
+            
+            //This is polymorphism!! You can add a painting to the StoreItem array
             numStoreItems[count]= painting;
 
         }
@@ -286,11 +292,11 @@ public class GUIClass extends JFrame
         count++;
         
 
-    }
-    catch(NumberFormatException e)
-    {
-        JTextArea1.setText("An error occured. Please check your input fields.");   
-    }
+        }
+        catch(NumberFormatException e)
+        {
+            JTextArea1.setText("An error occured. Please check your input fields.");   
+        }
 
         }
     }
@@ -311,7 +317,7 @@ public class GUIClass extends JFrame
  */
       private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         //change input accessibility based on selection
-        int index = 0; //set as book for default
+        
         index = jComboBox1.getSelectedIndex();
         //book
         if(index == 0)
